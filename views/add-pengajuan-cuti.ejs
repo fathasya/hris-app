@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="card pt-4 pb-5 px-4 my-4">
+        <form role="form" action="/form-pengajuan-cuti" method="post">
+            <a href="/pengajuan-cuti" class="bg-info px-2 py-2  rounded shadow-md text-white text-xs"> 
+                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-2 h-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg> Back
+            </a>
+            <h6 class="mb-4 text-center">AJUKAN CUTI</h6>
+            <hr class="horizontal dark mt-0">
+            <div class="mb-3">
+                <label for="jumlah_hari">Jumlah Hari</label>
+                <input type="number" class="form-control" id="jumlah_hari" name="jumlah_hari" required>
+            </div>
+            <div class="mb-3">
+                <label for="tgl_mulai">Tanggal Mulai</label>
+                <input type="date" class="form-control" name="tgl_mulai" id="tgl_mulai" required>
+            </div>
+            <div class="mb-3">
+                <label for="tgl_selesai">Tanggal Selesai</label>
+                <input type="date" class="form-control" name="tgl_selesai" required>
+            </div>
+            <div class="mb-3">
+                <label for="ket">Keterangan</label>
+                <input type="text" name="ket" id="ket" class="form-control"required>
+            </div>
+            <button type="submit" name="submit" class="btn btn-info">Submit</button>
+        </form>
+    </div>
+</div>

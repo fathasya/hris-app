@@ -1,0 +1,56 @@
+<div class="container-fluid py-4 h-screen">
+    <% if (messages.success) { %>
+    <div class="alert alert-success text-xxs text-white" role="alert"><%- messages.success %></div>
+    <% } %>
+
+    <% if (messages.error) { %>
+    <div class="alert alert-danger text-xxs text-white" role="alert"><%- messages.error %></div>
+    <% } %>
+    <div class="card mb-4">
+        <div class="card-header pb-0">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h6>DATA JABATAN</h6>
+                </div>
+                <div class="col-lg-6 text-end">
+                    <a href="add-jabatan" class="btn text-2xl px-3 py-1 bg-info text-white">
+                        +
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-3">
+            <table class="table table-bordered mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder">No</th>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder">Nama Jabatan</th>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(data.length) { %>
+                    <% for(var i = 0; i< data.length; i++) { %>
+                    <tr>
+                    <td class="text-center text-xs p-3"> <%= (i+1) %> </td>
+                    <td class="text-xs p-3"> <%= data[i].nama.toUpperCase() %> </td>
+                    <td class="text-center text-xs p-3">
+                        <a href="edit-pegawai/<%= data[i].id_user %>" class="px-2 py-2 m-1 text-white shadow-lg rounded bg-warning">
+                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-4 h-4 mb-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                            </svg> Update
+                        </a>
+                    </td>
+                    </tr>
+                    <% } %>
+                    <% } else if(!data.length) { %>
+                        <tr>
+                            <td class="text-center text-xs" colspan="7">No Data Found!</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>

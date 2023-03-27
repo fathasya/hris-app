@@ -1,0 +1,48 @@
+<div class="container-fluid py-4">
+    <div class="card mb-4">
+        <div class="card-header pb-2">
+            <% if (level == 2) { %>
+                <a href="/data-absensi-pegawai" class="bg-info px-2 py-2  rounded shadow-md text-white text-xs">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-2 h-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg> Back
+                </a>
+                <h5 class="text-center">DATA ABSENSI</h5>
+            <% }else if(level == 1) { %>
+                <h5>DATA ABSENSI</h5>
+            <% } %>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-3">
+            <table class="table border mb-4">
+                <thead>
+                    <tr>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Tanggal</th>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Jam</th>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(data.length) { 
+                        for(var i = 0; i< data.length; i++) { %>
+                        <tr>
+                        <td class="text-center text-xs p-3 border"> <%= data[i].tgl.toLocaleDateString() %> </td>
+                        <td class="text-center text-xs p-3 border"> <%= data[i].jam %> </td>
+                        <% if(data[i].jam.slice(0,2) > 07){ %>
+                            <td class="text-center text-danger text-xs p-3 border"> Terlambat </td>
+                        <% }else{ %>
+                            <td class="text-center text-xs p-3 border"> Tepat Waktu </td>
+                        <% } %> 
+                        </tr>
+                        <% }
+                    }else if(!data.length){ %>
+                        <tr>
+                            <td class="text-center text-xs p-3 border" colspan="3">No Data Found!</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            
+        </div>
+        </div>
+    </div>

@@ -1,0 +1,168 @@
+<div class="container-fluid py-4 h-screen">
+    <% if (messages.successs) { %>
+        <div class="alert alert-success mb-3 text-xs text-white" role="alert"><%- messages.successs %></div>
+    <% } %>
+
+    <% if (messages.errors) { %>
+        <div class="alert alert-danger mb-3 text-xs text-white" role="alert"><%- messages.errors %></div>
+    <% } %>    
+    <div class="card mb-4">
+        <div class="card-header pb-0">
+            <div class="row">
+                <div class="col-lg-6 col-sm-6">
+                    <h6>MASTER STATUS PEGAWAI</h6>
+                </div>
+                <div class="col-lg-6 col-sm-6 text-end">
+                    <a href="add-status" class="btn text-2xl px-3 py-1 bg-info text-white">
+                        +
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body px-4 pt-0 pb-2">
+        <div class="table-responsive p-3">
+            <table class="table mb-4">
+                <thead>
+                    <div class="row border">
+                        <div class="col-lg-1 col-md-1 col-sm-2 text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">No</div>
+                        <div class="col-lg-8 col-md-8 col-sm-7 text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Status Pegawai</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Actions</div>
+                    </div>
+                </thead>
+                <tbody>
+                    <% if(status.length) { %>
+                    <% for(var i = 0; i< status.length; i++) { %>
+                    <div class="row border">
+                    <div class="col-lg-1 col-md-1 col-sm-2 text-center text-xs p-3 border"> <%= (i+1) %> </div>
+                    <div class="col-lg-8 col-md-8 col-sm-7 text-xs p-3 border" colspan="10"> <%= status[i].status.toUpperCase() %> </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-center text-xxs p-3 border">
+                        <a href="edit-status/<%= status[i].id_status%>" class="px-2 py-2 m-1 text-white shadow-lg rounded bg-warning">
+                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-xl-8 h-xl-8 w-sm-10 h-sm-10 mb-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                            </svg> Update
+                        </a>
+                    </div>
+                    </div>
+                    <% } %>
+                    <% } else if(!status.length) { %>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center text-xs" colspan="7">No Data Found!</div>
+                        </div>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>    
+    
+    <% if (messages.successdiv) { %>
+        <div class="alert alert-success my-3 text-xxs text-white" role="alert"><%- messages.successdiv %></div>
+    <% } %>
+
+    <% if (messages.errordiv) { %>
+        <div class="alert alert-danger my-3 text-xxs text-white" role="alert"><%- messages.errordiv %></div>
+    <% } %>
+    <div class="card mb-4">        
+        <div class="card-header pb-0">
+            <div class="row">
+                <div class="col-lg-6 col-sm-6">
+                    <h6>MASTER DIVISI</h6>
+                </div>
+                <div class="col-lg-6 col-sm-6 text-end">
+                    <a href="add-divisi" class="btn text-2xl px-3 py-1 bg-info text-white">
+                        +
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body px-4 pt-0 pb-2">
+        <div class="table-responsive p-3">
+            <table class="table mb-4">
+                <thead>
+                    <div class="row border">
+                        <div class="col-lg-1 col-md-1 col-sm-2 text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">No</div>
+                        <div class="col-lg-8 col-md-8 col-sm-7 text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Divisi</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Actions</div>
+                    </div>
+                </thead>
+                <tbody>
+                    <% if(divisi.length) { %>
+                    <% for(var i = 0; i< divisi.length; i++) { %>
+                    <div class="row border">
+                    <div class="col-lg-1 col-md-1 col-sm-2 text-center text-xs p-3 border"> <%= (i+1) %> </div>
+                    <div class="col-lg-8 col-md-8 col-sm-7 text-xs p-3 border"> <%= divisi[i].divisi.toUpperCase() %> </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-center text-xs p-3 border">
+                        <a href="edit-divisi/<%= divisi[i].id_divisi %>" class="px-2 py-2 m-1 text-white shadow-lg rounded bg-warning">
+                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-xl-8 h-xl-8 w-sm-10 h-sm-10 mb-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                            </svg> Update
+                        </a>
+                    </div>
+                    </div>
+                    <% } %>
+                    <% } else if(!divisi.length) { %>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center text-xs" colspan="7">No Data Found!</div>
+                        </div>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+    <% if (messages.successj) { %>
+        <div class="alert alert-success my-3 text-xxs text-white" role="alert"><%- messages.successj %></div>
+    <% } %>
+
+    <% if (messages.errorj) { %>
+        <div class="alert alert-danger my-3 text-xxs text-white" role="alert"><%- messages.errorj %></div>
+    <% } %>
+    <div class="card mb-5">
+        <div class="card-header pb-0">
+            <div class="row">
+                <div class="col-lg-6 col-sm-6">
+                    <h6>MASTER JABATAN</h6>
+                </div>
+                <div class="col-lg-6 col-sm-6 text-end">
+                    <a href="add-jabatan" class="btn text-2xl px-3 py-1 bg-info text-white">
+                        +
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body px-4 pt-0 pb-2">
+        <div class="table-responsive p-3">
+            <table class="table mb-4">
+                <thead>
+                    <div class="row border">
+                        <div class="col-lg-1 col-md-1 col-sm-2 text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">No</div>
+                        <div class="col-lg-8 col-md-8 col-sm-7 text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Jabatan</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Actions</div>
+                    </div>
+                </thead>
+                <tbody>
+                    <% if(jabatan.length) { %>
+                    <% for(var i = 0; i< jabatan.length; i++) { %>
+                    <div class="row border">
+                        <div class="col-lg-1 col-md-1 col-sm-2 text-center text-xs p-3 border"> <%= (i+1) %> </div>
+                        <div class="col-lg-8 col-md-8 col-sm-7 text-xs p-3 border"> <%= jabatan[i].jabatan.toUpperCase() %> </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 text-center text-xs p-3 border">
+                            <a href="edit-jabatan/<%= jabatan[i].id_jabatan %>" class="px-2 py-2 m-1 text-white shadow-lg rounded bg-warning">
+                                <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-xl-8 h-xl-8 w-sm-10 h-sm-10 mb-1">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                </svg> Update
+                            </a>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% } else if(!jabatan.length) { %>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-center text-xs border" colspan="7">No Data Found!</div>
+                        </div>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>

@@ -1,0 +1,79 @@
+<div class="container-fluid py-4 h-screen">
+    <% if(data.length) { %>
+    <% for(var i = 0; i< data.length; i++) { %>
+    <div class="card mb-4">
+        <div class="card-header pb-0">
+                <a href="/data-pegawai" class="bg-info px-2 py-2  rounded shadow-md text-white text-xs"> 
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-2 h-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg> Back
+                </a>
+                <p class="text-center text-lg text-bolder">DETAIL INFORMASI PEGAWAI - <%- data[i].nama.toUpperCase() %></p>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-3">
+            <table class="table mb-0">
+                <tbody class="text-sm">
+                <tr>
+                    <td>NIK</td>
+                    <td>: <%= data[i].nik %> </td>
+                </tr>
+                <tr>
+                    <td>Nama Pegawai</td>
+                    <td>: <%= data[i].nama.toUpperCase() %></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Lahir</td>
+                    <td>: <%= data[i].tgl_lahir.toUTCString().slice(4,16) %></td>
+                </tr>
+                <tr>
+                    <td>No. HP</td>
+                    <td>: <%= data[i].no_hp %></td>
+                </tr>
+                <tr>
+                    <td>No. Kontrak</td>
+                    <td>: <%= data[i].no_kontrak %></td>
+                </tr>
+                <tr>
+                    <td>Divisi</td>
+                    <td>: <%= data[i].divisi %></td>
+                </tr>
+                <tr>
+                    <td>Jabatan</td>
+                    <td>: <%= data[i].jabatan %></td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>: <%= data[i].status %></td>
+                </tr>
+                <tr>
+                    <td>Pendididikan Terakhir</td>
+                    <td>: <%= data[i].pendidikan%></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>: <%= data[i].email%></td>
+                </tr>
+                <tr>
+                    <td>Email Kantor</td>
+                    <% if (data[i].email_kantor == '') { %>
+                        <td>: - </td>                     
+                    <% }else if (data[i].email_kantor != '') {%>
+                        <td>: <%= data[i].email_kantor %> </td>                     
+                    <% } %>
+                </tr>
+                <tr>
+                    <td>Alamat</td>
+                    <td>: <%= data[i].alamat %></td>    
+                </tr>
+                <% } %>
+                <% } else if(!data.length) { %>
+                <tr>
+                    <td class="text-center text-xxs" colspan="2">No Data Found!</td>
+                </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>

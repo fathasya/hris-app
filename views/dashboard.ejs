@@ -1,0 +1,189 @@
+<div class="container-fluid py-4">
+  <% if (level == 1) { %>   
+    <div class="row">
+      <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+        <div class="row mb-3">
+          <% if (messages.success) { %>
+            <div class="alert alert-success text-white text-xxs" role="alert"><%- messages.success %></div>
+          <% } %>
+          <% if (messages.error) { %>
+            <div class="alert alert-danger text-white text-xxs" role="alert"><%- messages.error %></div>
+          <% } %>
+          <div class="card">
+            <div class="card-body p-3 text-center">
+              <form action="/form-add-absensi" method="post">
+                <input type="submit" class="btn text-white text-sm bg-info mt-2 w-100" value="Absen Hari ini">
+              </form>
+              <hr class="horizontal dark mt-0">
+              <a class="text-xxs text-dark" href="add-pengajuan-cuti">Ajukan Cuti ?</a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="card">
+              <% if(data.length) { for(var i = 0; i< data.length; i++) { %>
+              <div class="card-body px-0 pt-3 pb-1">
+                <p class="text-dark text-md text-uppercase text-bold text-center">Rekap Absensi</p>
+                <hr class="horizontal dark mt-0">
+                  <ul class="text-xxs">
+                    <% if (data[i].hadir == null) { %>
+                      <li>Hadir &emsp; &emsp; &emsp; &nbsp;: - </li>                     
+                    <% }else if(data[i].hadir != null){ %>
+                      <li>Hadir &emsp; &emsp; &emsp; &nbsp;: <%= data[i].hadir %> </li>
+                    <% } %>
+                    <% if (data[i].absen == null) { %>
+                      <li>Hadir &emsp; &emsp; &emsp; &nbsp;: - </li>                     
+                    <% }else if(data[i].absen != null){ %>
+                      <li>Tidak Hadir &emsp; : <%= data[i].absen %> </li>
+                    <% } %>
+                  </ul>
+              </div>
+                <% }
+              } %>
+            </div>
+        </div>
+      </div>
+      <div class="col-xl-8 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-body p-3">
+                <form action="/form-add-activity" method="post">
+                <p class="text-center text-dark text-bold text-md text-uppercase py-2">Daily Activity</p>
+                <hr class="horizontal dark mt-0">
+                <input type="date" name="tgl" id="tgl" class="form-control" required>
+                <textarea class="form-control my-3" name="detail" id="daily-activity" cols="30" rows="2"></textarea>
+                <button class="btn btn-info w-100" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <% if (messages.success_notif) { %>
+        <div class="alert alert-success text-white text-xxs" role="alert"><%- messages.success_notif %></div>
+      <% } %>
+      <% if (messages.error_notif) { %>
+        <div class="alert alert-danger text-white text-xxs" role="alert"><%- messages.error_notif %></div>
+      <% } %>
+      <div class="card">
+        <div class="card-body p-3">
+            <p class="text-dark text-bold text-md text-uppercase py-2">Notifikasi</p>
+            <% if(notif.length) { for(var i = 0; i< notif.length; i++) { %>
+              <div class="row">
+                <div class="col-lg-10">
+                  <% if (notif[i].status == 1) { 
+                    var status = 'Not Verified'
+                    }else if(notif[i].status == 2) {
+                    var status = 'Approved'
+                    }else if(notif[i].status == 3) {
+                    var status = 'Not Approved'
+                  }%>
+                  <p>
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-xl-2 h-xl-2 w-sm-3 h-sm-3 mb-1 me-1">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                    </svg> <%= status %> | Pengajuan Cuti Pada <%= notif[i].tgl_mulai.toUTCString().slice(4,16) %> - <%= notif[i].tgl_selesai.toUTCString().slice(4,16) %>    
+                  </p>
+                </div>
+                <div class="col-lg-2 text-end">
+                  <a href="/delete-notif/<%= notif[i].id_temp_cuti %>" class="bg-danger p-2 rounded">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-15 h-15">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                      </svg>                  
+                  </a>
+                </div>
+                <hr class="horizontal dark my-3">
+              </div>
+              <% }
+              }else if(!notif.length){ %>
+                <hr class="horizontal dark">
+                <div class="row">
+                  <p class="text-center my-5 text-xxs">Belum Ada Notifikasi!</p>
+                </div>
+              <% } %>
+        </div>
+      </div>
+    </div>
+  <% }else if(level == 2) { %>
+    <div class="row mb-4 p-0">
+      <% if(data.length) { for(var i = 0; i< data.length; i++) { %>
+      <div class="col-xl-4 col-sm-4 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="card-body pt-md-4 pt-sm-0 pb-2 text-center">
+            <div class="row">
+              <div class="col-lg-4 p-0">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-xl-40 h-xl-40 mt-3 w-sm-0">
+                  <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z" />
+                </svg>              
+              </div>
+              <div class="col-lg-8 text-start p-0">
+                <p class="p-0 mb-0 text-2xl text-bolder"><%= data[i].pegawai_hadir %></p>
+                <p class="text-md text-success text-bold">PEGAWAI HADIR</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-sm-4 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="card-body pt-md-4 pt-sm-0 pb-2 text-center">
+            <div class="row">
+              <div class="col-lg-4 p-0">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-xl-40 h-xl-40 mt-3 w-sm-0">
+                  <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+                </svg>              
+              </div>
+              <div class="col-lg-8 text-start p-0">
+                <p class="p-0 mb-0 text-2xl text-bolder"><%= data[i].jumlah_pegawai-data[i].pegawai_hadir %></p>
+                <p class="text-md text-md-sm text-danger text-bold">PEGAWAI TIDAK HADIR</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-sm-4 mb-xl-0 mb-4">
+        <div class="card">
+          <div class="card-body pt-md-4 pt-sm-0 pb-2 text-center">
+            <div class="row">
+              <div class="col-lg-4 p-0">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-xl-40 h-xl-40 mt-3 w-sm-0">
+                  <path fill-rule="evenodd" d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z" clip-rule="evenodd" />
+                  <path d="M5.082 14.254a8.287 8.287 0 00-1.308 5.135 9.687 9.687 0 01-1.764-.44l-.115-.04a.563.563 0 01-.373-.487l-.01-.121a3.75 3.75 0 013.57-4.047zM20.226 19.389a8.287 8.287 0 00-1.308-5.135 3.75 3.75 0 013.57 4.047l-.01.121a.563.563 0 01-.373.486l-.115.04c-.567.2-1.156.349-1.764.441z" />
+                </svg>              
+              </div>
+              <div class="col-lg-8 text-start p-0">
+                <p class="p-0 mb-0 text-2xl text-bolder"><%= data[i].jumlah_pegawai %></p>
+                <p class="text-md text-info text-bold">JUMLAH PEGAWAI</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }
+    } %>
+    </div>
+    <div class="row">
+      <div class="card">
+        <div class="card-body p-3">
+            <p class="text-dark text-bold text-md text-uppercase py-2">Notifikasi</p>
+            <% if(notif.length) { for(var i = 0; i< notif.length; i++) { %>
+              <div class="row">
+                <a href="data-cuti-pegawai" class="text-sm">
+                  <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-xl-2 h-xl-2 w-sm-3 h-sm-3 mb-1 me-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg> Pengajuan Cuti | <%= notif[i].nama %>          
+                </a>
+                <hr class="horizontal dark my-3">
+              </div>
+                <% } %>
+              <% }else if(!notif.length){ %>
+                <hr class="horizontal dark">
+                <div class="row">
+                  <p class="text-center my-5 text-xxs">Belum Ada Notifikasi!</p>
+                </div>
+                <% } %>
+        </div>
+      </div>
+    </div>
+
+  <% } %>
+
+</div>

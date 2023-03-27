@@ -1,0 +1,91 @@
+<div class="container-fluid py-4 h-screen">
+    <% if (messages.success) { %>
+    <div class="alert alert-success text-xxs text-white" role="alert"><%- messages.success %></div>
+    <% } %>
+
+    <% if (messages.error) { %>
+    <div class="alert alert-danger text-xxs text-white" role="alert"><%- messages.error %></div>
+    <% } %>
+    <div class="col-lg-12 ms-3 d-flex align-items-center">
+        <p class="text-2xl text-bold text-dark">DATA PEGAWAI</p>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header pb-0">
+            <div class="row">
+                <div class="col-lg-8 col-sm-6 d-flex align-items-center">
+                    <a href="add-pegawai" class="btn text-2xl px-3 py-1 bg-info text-white">
+                        +
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="ms-sm-auto pe-sm-3 py-sm-3 d-flex align-items-center">
+                        <form action="/search-pegawai" method="post" class="d-flex gap-3 align-items-center">
+                            <div class="input-group">
+                                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="search-pegawai" name="search_pegawai" placeholder="Type here...">
+                            </div>
+                            <button type="submit" name="submit" class="btn btn-dark my-auto text-xxs">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive px-3 py-2">
+            <table class="table border mb-4">
+                <thead>
+                    <tr>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">No</th>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">NIK</th>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Nama Pegawai</th>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Divisi</th>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Jabatan</th>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Status</th>
+                        <th class="text-uppercase text-center text-secondary text-xs font-weight-bolder p-3 border">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(data.length) { %>
+                    <% for(var i = 0; i< data.length; i++) { %>
+                    <tr>
+                    <td class="text-center text-xs p-3 border"> <%= (i+1) %> </td>
+                    <td class="data-pegawai text-center text-xs p-3 border"> <%= data[i].nik%> </td>
+                    <td class="data-pegawai text-xs p-3 border"> <%= data[i].nama.toUpperCase() %> </td>
+                    <td class="data-pegawai text-center text-xs p-3 border"> <%= data[i].divisi.toUpperCase() %> </td>
+                    <td class="data-pegawai text-center text-xs p-3 border"> <%= data[i].jabatan.toUpperCase() %> </td>
+                    <td class="data-pegawai text-center text-xs p-3 border"> <%= data[i].status.toUpperCase() %> </td>
+                    <td class="data-pegawai text-center text-xxs py-3 px-0 border">
+                        <a href="edit-pegawai/<%= data[i].id_user %>" class="px-2 py-2 ms-3 me-1 text-white shadow-lg rounded bg-warning">
+                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-xl-4 h-xl-4 w-sm-0 mb-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                            </svg> Update
+                        </a>
+                        <a href="detail-pegawai/<%= data[i].id_user %>" class="px-2 py-2 m-1 text-white shadow-lg rounded bg-info">
+                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-xl-4 h-xl-4 w-sm-0 mb-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                            </svg> Details  
+                        </a>
+                        <a href="/daily-activity/<%= data[i].id_user%>" class="px-2 py-2 mx-1 text-white shadow-lg rounded bg-primary">
+                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-xl-4 h-xl-4 w-sm-0 mb-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
+                            </svg> &nbsp;Activity
+                        </a>
+                        <a href="/reset/<%= data[i].id_user%>" class="px-2 py-2 ms-1 me-3 text-white shadow-lg rounded bg-danger">
+                            <svg fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="white" class="w-xl-4 h-xl-4 w-sm-0 mb-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                            </svg> &nbsp;Reset Password
+                        </a>
+                    </td>
+                    </tr>
+                    <% } %>
+                    <% } else if(!data.length) { %>
+                        <tr>
+                            <td class="text-center text-xs" colspan="7">No Data Found!</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>

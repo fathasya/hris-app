@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <% if(data.length) { for(var i = 0; i< data.length; i++) { %>
+    <div class="card pt-4 pb-5 px-4 my-4">
+        <form role="form" action="/form-edit-approval/<%= data[i].id_cuti_pegawai %>" method="post">
+            <h6 class="mb-4 text-center">EDIT STATUS CUTI <%= data[i].nama.toUpperCase() %></h6>
+            <hr class="horizontal dark mt-0">
+            <div class="mb-3">
+                <label for="nama">Nama Pegawai</label>
+                <input type="text" name="nama" id="nama" class="form-control" value="<%= data[i].nama.toUpperCase() %>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="jumlah_hari">Jumlah Cuti</label>
+                <input type="number" class="form-control" id="jumlah_hari" name="jumlah_hari" value="<%= data[i].jumlah_hari %>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="tgl_mulai">Tanggal Mulai</label>
+                <input type="date" class="form-control" name="tgl_mulai" id="tgl_mulai" value="<%= data[i].tgl_mulai.toISOString().slice(0,10) %>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="tgl_selesai">Tanggal Selesai</label>
+                <input type="date" class="form-control" name="tgl_selesai" value="<%= data[i].tgl_selesai.toISOString().slice(0,10) %>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="ket">Keterangan</label>
+                <input type="text" name="ket" id="ket" class="form-control" value="<%= data[i].ket.toUpperCase() %>" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="status">Status Approval</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="1">Not Verified</option>
+                    <option value="2">Approved</option>
+                    <option value="3">Not Approved</option>
+                </select>
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary">Update Data</button>
+        </form>
+    </div>
+        <% } 
+     } %>
+</div>
