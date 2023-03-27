@@ -61,7 +61,7 @@ router.get('/dashboard', (req,res) => {
                 let bulan = new Date().getMonth()+1
                 const tahun = new Date().getFullYear()
                 const tgl = "'"+tahun+'-'+bulan+'-'+hari+"'"
-                conn.query(`SELECT COUNT(id_user) as jumlah_pegawai, (SELECT COUNT(id_user) FROM absensi WHERE absensi.tgl = ${tgl} )as pegawai_hadir FROM pegawai WHERE id_status = 1`, (err,rows) => {
+                conn.query(`SELECT COUNT(id_user) as jumlah_pegawai, (SELECT COUNT(id_user) FROM absensi WHERE absensi.tgl = ${tgl} )as pegawai_hadir FROM pegawai`, (err,rows) => {
                     if(err){
                         res.render('dashboard', {
                             layout: 'layouts/mainLayout',
